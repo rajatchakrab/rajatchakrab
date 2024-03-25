@@ -1,5 +1,4 @@
 import { Configuration } from '@nuxt/types';
-import fg from 'fast-glob';
 import settings from './app/content/settings/general.json';
 import manifest from './app/content/settings/manifest.json';
 
@@ -55,17 +54,6 @@ const nuxtConfig: Configuration = {
     scss: ['~assets/css/_variables.scss', '~assets/css/_mixins.scss'],
   },
 
-  generate: {
-    subFolders: false,
-
-    routes: [
-      ...fg.sync(['./app/content/settings/**.json']).map(url => ({
-        route: url.replace(/^\.\/app\/content\/settings\/|\.json$/gi, ''),
-        payload: require(url),
-      })),
-    ],
-  },
-
   /*
    ** Plugins to load before mounting the App
    */
@@ -76,19 +64,11 @@ const nuxtConfig: Configuration = {
    */
   modules: ['@nuxtjs/pwa', '@nuxtjs/style-resources', '@nuxtjs/markdownit'],
 
-
   markdownit: {
     preset: 'default',
-
     injected: true,
-
-    // Convert '\n' in paragraphs into <br>
     breaks: true,
-
-    // Enable HTML tags in source
     html: true,
-
-    // Enable some language-neutral replacement + quotes beautification
     typographer: true,
   },
 
@@ -146,8 +126,6 @@ const nuxtConfig: Configuration = {
         removeOptionalTags: false,
         collapseWhitespace: true,
         decodeEntities: true,
-
-        // CSS & JS are already optimised with TerserWebpack & OptimizeCSSAssetsPlugin
         minifyCSS: false,
         minifyJS: false,
         processConditionalComments: true,
