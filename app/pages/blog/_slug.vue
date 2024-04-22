@@ -6,6 +6,14 @@
       </h1>
     </div>
 
+    <!-- Remove the image rendering code -->
+    <!-- <img
+      :alt="post.title"
+      class="w-full"
+      :src="post.featuredImage || 'https://source.unsplash.com/random/640x340'"
+    /> -->
+
+    <!-- Render post content without images -->
     <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
   </article>
 </template>
