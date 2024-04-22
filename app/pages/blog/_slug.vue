@@ -7,7 +7,7 @@
     </div>
 
     <!-- Render post content without images -->
-    <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
+    <div v-html="formatPostContent(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
   </article>
 </template>
 
@@ -32,6 +32,11 @@ import { MetaInfo } from 'vue-meta';
 export default class BlogPost extends Vue {
   post!: Post;
 
+  formatPostContent(content: string): string {
+    // Use a regular expression to insert a line break after the first paragraph
+    return content.replace(/<p>(.*?)<\/p>/, '<p>$1</p><br>');
+  }
+
   async asyncData({ params, payload }): Promise<{ post: Post }> {
     if (payload) {
       return { post: payload };
@@ -48,9 +53,3 @@ export default class BlogPost extends Vue {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.post__content .first-paragraph {
-  margin-bottom: 1rem; // Adjust the margin-bottom as needed
-}
-</style>
