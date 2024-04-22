@@ -50,7 +50,7 @@ export default class BlogPost extends Vue {
 </script>
 
 <style scoped lang="scss">
-.post__content p:first-of-type {
+.post__content .first-paragraph {
   margin-bottom: 1rem; // Adjust the margin-bottom as needed
 }
 </style>
