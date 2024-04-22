@@ -1,4 +1,3 @@
-
 <template>
   <article class="post" :class="post.slug">
     <div class="py-8 md:py-16 text-center mx-auto">
@@ -7,13 +6,10 @@
       </h1>
     </div>
 
-    <!-- Add margin-top style directly to the first paragraph -->
-    <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" 
-         style="margin-top: 1rem;" />
+    <!-- Render post content without images -->
+    <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
   </article>
 </template>
-
-
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
@@ -29,12 +25,6 @@ import { MetaInfo } from 'vue-meta';
           name: 'description',
           content: this.post.seoDescription,
         },
-        // Remove the following meta tag for og:image
-        // {
-        //   hid: 'og:image',
-        //   name: 'og:image',
-        //   content: this.post.seoMetaImage,
-        // },
       ],
     };
   },
@@ -49,12 +39,6 @@ export default class BlogPost extends Vue {
 
     try {
       const post = require(`@/content/blog/${params.slug}.json`);
-      // Modify the fetched post data to exclude any image-related information
-      // For example, you can delete or set the image-related properties to null
-      delete post.featuredImage;
-      // Alternatively, you can create a new object with only the required properties
-      // const postData = { title: post.title, content: post.content, ... };
-      
       return {
         post,
       };
@@ -64,3 +48,9 @@ export default class BlogPost extends Vue {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.post__content p:first-of-type {
+  margin-bottom: 1rem; // Adjust the margin-bottom as needed
+}
+</style>
