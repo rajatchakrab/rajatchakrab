@@ -7,14 +7,11 @@
       </h1>
     </div>
 
-    <!-- Insert an empty div for spacing between the title and content -->
-    <div class="my-4"></div>
-
-    <!-- Render post content without images -->
-    <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
+    <!-- Add margin-top style directly to the first paragraph -->
+    <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" 
+         style="margin-top: 1rem;" />
   </article>
 </template>
-
 
 
 
