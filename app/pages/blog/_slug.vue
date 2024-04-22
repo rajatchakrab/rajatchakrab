@@ -1,3 +1,4 @@
+
 <template>
   <article class="post" :class="post.slug">
     <div class="py-8 md:py-16 text-center mx-auto">
@@ -6,17 +7,15 @@
       </h1>
     </div>
 
-    <!-- Remove the image rendering code -->
-    <!-- <img
-      :alt="post.title"
-      class="w-full"
-      :src="post.featuredImage || 'https://source.unsplash.com/random/640x340'"
-    /> -->
+    <!-- Insert an empty div for spacing between the title and content -->
+    <div class="my-4"></div>
 
     <!-- Render post content without images -->
     <div v-html="$md.render(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
   </article>
 </template>
+
+
 
 
 <script lang="ts">
