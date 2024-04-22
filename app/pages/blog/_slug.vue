@@ -1,16 +1,3 @@
-<template>
-  <article class="post" :class="post.slug">
-    <div class="py-8 md:py-16 text-center mx-auto">
-      <h1 class="text-lg md:text-xl lg:text-4xl xl:text-6xl">
-        {{ post.title }}
-      </h1>
-    </div>
-
-    <!-- Render post content without images -->
-    <div v-html="formatPostContent(post.content)" class="post__content markdown pt-4 md:pt-6 md:pb-24" />
-  </article>
-</template>
-
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import { MetaInfo } from 'vue-meta';
@@ -25,17 +12,17 @@ import { MetaInfo } from 'vue-meta';
           name: 'description',
           content: this.post.seoDescription,
         },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          content: this.post.seoMetaImage,
+        },
       ],
     };
   },
 })
 export default class BlogPost extends Vue {
   post!: Post;
-
-  formatPostContent(content: string): string {
-    // Use a regular expression to insert a line break after the first paragraph
-    return content.replace(/<p>(.*?)<\/p>/, '<p>$1</p><br>');
-  }
 
   async asyncData({ params, payload }): Promise<{ post: Post }> {
     if (payload) {
@@ -44,6 +31,10 @@ export default class BlogPost extends Vue {
 
     try {
       const post = require(`@/content/blog/${params.slug}.json`);
+      
+      // Add a line break after the first paragraph
+      post.content = post.content.replace(/^(.*?<\/p>)(.*)$/s, '$1\n$2');
+      
       return {
         post,
       };
