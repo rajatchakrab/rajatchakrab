@@ -11,11 +11,12 @@
       <div v-for="(post, index) in posts" :key="index" class="w-full md:w-1/2 my-4 md:px-4">
         <div class="post">
           <nuxt-link :to="`/blog/${post.slug}`">
-            <img
+            <!-- Remove or comment out the image tag -->
+            <!-- <img
               :alt="post.title"
               class="w-full"
               :src="post.featuredImage || 'https://source.unsplash.com/random/640x340'"
-            />
+            /> -->
             <div class="p-6 bg-white">
               <h2 class="text-2xl mb-2">{{ post.title }}</h2>
 
@@ -32,6 +33,8 @@
     <Pagination v-if="totalPages > 1" :current-page="currentPage" :total-pages="totalPages" />
   </section>
 </template>
+
+
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
