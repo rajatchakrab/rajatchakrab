@@ -57,7 +57,7 @@ collections:
     label: 'Blog'
     folder: 'app/content/blog'
     create: true
-    slug: '{{slug}}'
+    slug: '{{title}}'
     format: 'json'
     sort: 'published_at:desc'
     fields:
